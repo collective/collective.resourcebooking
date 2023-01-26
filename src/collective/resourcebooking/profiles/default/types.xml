@@ -6,4 +6,5 @@
   <object name="Ressources" meta_type="Dexterity FTI"/>
   <object name="Bookings" meta_type="Dexterity FTI"/>
   <object name="Ressource" meta_type="Dexterity FTI"/>
+  <object name="Booking" meta_type="Dexterity FTI"/>
 </object>

@@ -1,38 +1,30 @@
 <?xml version="1.0"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    name="Bookings"
+    name="Booking"
     meta_type="Dexterity FTI"
     i18n:domain="collective.resourcebooking">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">Bookings</property>
+      name="title">Booking</property>
   <property
       i18n:translate=""
-      name="description">A container holding resources bookings.</property>
+      name="description">A ressource booking.</property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">Bookings</property>
+  <property name="factory">Booking</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
   <property name="global_allow">False</property>
-  <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="Booking" />
-      <!--
-    <element value="Document" />
-    <element value="File" />
-  -->
-  </property>
   <!-- Schema, class and security -->
-  <property name="add_permission">collective.resourcebooking.AddBookings</property>
-  <property name="klass">collective.resourcebooking.content.bookings.Bookings</property>
+  <property name="add_permission">collective.resourcebooking.AddBooking</property>
+  <property name="klass">collective.resourcebooking.content.booking.Booking</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">collective.resourcebooking.content.bookings.IBookings</property>
+  <property name="schema">collective.resourcebooking.content.booking.IBooking</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
@@ -54,14 +46,10 @@
     <!--<element value="plone.tableofcontents"/>-->
     <!--<element value="plone.versioning" />-->
     <!--<element value="plone.translatable" />-->
-    <!--<element value="plone.nextprevioustoggle" />-->
-    <!--<element value="plone.nextpreviousenabled" />-->
-    <!--<element value="plone.navigationroot" />-->
-    <!--<element value="plone.selectablecontrainstypes" />-->
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++Bookings</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Booking</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>

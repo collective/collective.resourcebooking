@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="collective.resourcebooking.AddBooking"
+        title="collective.resourcebooking: Add Booking"
+    />
+
+
+    <permission
         id="collective.resourcebooking.AddRessource"
         title="collective.resourcebooking: Add Ressource"
     />

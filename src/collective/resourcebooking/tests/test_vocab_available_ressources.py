@@ -38,6 +38,9 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
         )
 
     def test_vocab_available_ressources(self):
+        booking = api.content.create(
+            container=self.bookings, type="Booking", title="Test Booking 1"
+        )
         vocab_name = "collective.resourcebooking.AvailableRessources"
         factory = getUtility(IVocabularyFactory, vocab_name)
         self.assertTrue(IVocabularyFactory.providedBy(factory))
@@ -45,13 +48,13 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
         vocabulary = factory(self.portal)
         self.assertTrue(IVocabularyTokenized.providedBy(vocabulary))
         self.assertEqual(
-            vocabulary.getTerm("sony-a7r-iii").title,
-            _("Sony Aplha 7R III"),
+            vocabulary.getTerm("room-2").title,
+            "Room 2",
         )
 
     def test_vocab_available_ressources_on_booking(self):
         booking = api.content.create(
-            container=self.bookings, type="Booking", title="Test Booking"
+            container=self.bookings, type="Booking", title="Test Booking", id="test-booking"
         )
         vocab_name = "collective.resourcebooking.AvailableRessources"
         factory = getUtility(IVocabularyFactory, vocab_name)
@@ -59,6 +62,6 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
         vocabulary = factory(booking)
         self.assertTrue(IVocabularyTokenized.providedBy(vocabulary))
         self.assertEqual(
-            vocabulary.getTerm("test-booking").title,
-            "Test Booking",
+            vocabulary.getTerm("room-1").title,
+            "Room 1",
         )

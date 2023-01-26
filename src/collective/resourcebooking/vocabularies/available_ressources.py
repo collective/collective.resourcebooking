@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# from plone import api
+from plone import api
 from collective.resourcebooking import _
 from plone.dexterity.interfaces import IDexterityContent
 from zope.globalrequest import getRequest
@@ -8,6 +8,8 @@ from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from Products.CMFCore.interfaces import ISiteRoot
+from collective.resourcebooking.content.ressource_booking import IRessourceBooking
 
 
 class VocabItem(object):
@@ -21,13 +23,16 @@ class AvailableRessources(object):
     """ """
 
     def __call__(self, context):
-        # Just an example list of content for our vocabulary,
-        # this can be any static or dynamic data, a catalog result for example.
-        items = [
-            VocabItem("sony-a7r-iii", _("Sony Aplha 7R III")),
-            VocabItem("canon-5d-iv", _("Canon 5D IV")),
-        ]
+        def get_resource_booking_container(obj):
+            if ISiteRoot.providedBy(obj):
+                return obj
+            parent = obj.__parent__
+            if not IRessourceBooking.providedBy(parent):
+                return get_resource_booking_container(parent)
+            return parent
+        resource_booking = get_resource_booking_container(context)
 
+        items = [VocabItem(item.id, item.Title) for item in api.content.find(context=resource_booking, portal_type="Ressource", sort_on="sortable_title") if item]
         # Fix context if you are using the vocabulary in DataGridField.
         # See https://github.com/collective/collective.z3cform.datagridfield/issues/31:  # NOQA: 501
         if not IDexterityContent.providedBy(context):

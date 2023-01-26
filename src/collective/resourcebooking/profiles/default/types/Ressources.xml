@@ -1,38 +1,37 @@
 <?xml version="1.0"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    name="RessourceBooking"
+    name="Ressources"
     meta_type="Dexterity FTI"
     i18n:domain="collective.resourcebooking">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">RessourceBooking</property>
+      name="title">Ressources</property>
   <property
       i18n:translate=""
-      name="description">A container to hold available ressources and there bookings</property>
+      name="description">Container holding available ressources to book.</property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">RessourceBooking</property>
+  <property name="factory">Ressources</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
-  <property name="global_allow">True</property>
+  <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="Ressources" />
-      <!--
+  <!--
     <element value="Document" />
     <element value="File" />
   -->
   </property>
   <!-- Schema, class and security -->
-  <property name="add_permission">collective.resourcebooking.AddRessourceBooking</property>
-  <property name="klass">collective.resourcebooking.content.ressource_booking.RessourceBooking</property>
+  <property name="add_permission">collective.resourcebooking.AddRessources</property>
+  <property name="klass">collective.resourcebooking.content.ressources.Ressources</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">collective.resourcebooking.content.ressource_booking.IRessourceBooking</property>
+  <property name="schema">collective.resourcebooking.content.ressources.IRessources</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
@@ -61,7 +60,7 @@
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++RessourceBooking</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Ressources</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>

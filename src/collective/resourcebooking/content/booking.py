@@ -16,7 +16,7 @@ class IBooking(model.Schema):
 
     start = schema.Datetime(
         title=_(
-            u'Start',
+            "Start",
         ),
         # defaultFactory=get_default_start,
         required=True,
@@ -24,7 +24,7 @@ class IBooking(model.Schema):
 
     end = schema.Datetime(
         title=_(
-            u'End',
+            "End",
         ),
         # defaultFactory=get_default_start,
         required=True,

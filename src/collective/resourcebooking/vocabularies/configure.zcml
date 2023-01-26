@@ -5,6 +5,12 @@
     <!-- -*- extra stuff goes here -*- -->
 
     <utility
+        component=".available_timeslots.AvailableTimeslotsFactory"
+        name="collective.resourcebooking.AvailableTimeslots"
+    />
+
+
+    <utility
         component=".available_ressources.AvailableRessourcesFactory"
         name="collective.resourcebooking.AvailableRessources"
     />

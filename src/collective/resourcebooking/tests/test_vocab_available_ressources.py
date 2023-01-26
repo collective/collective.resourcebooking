@@ -21,11 +21,21 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        roombookings = api.content.create(container=self.portal, type="RessourceBooking", title="roombookings")
-        self.bookings = api.content.create(container=roombookings, type="Bookings", title="Bookings")
-        self.ressources = api.content.create(container=roombookings, type="Ressources", title="Rooms")
-        self.room1 = api.content.create(container=self.ressources, type="Ressource", title="Room 1")
-        self.room2 = api.content.create(container=self.ressources, type="Ressource", title="Room 2")
+        roombookings = api.content.create(
+            container=self.portal, type="RessourceBooking", title="roombookings"
+        )
+        self.bookings = api.content.create(
+            container=roombookings, type="Bookings", title="Bookings"
+        )
+        self.ressources = api.content.create(
+            container=roombookings, type="Ressources", title="Rooms"
+        )
+        self.room1 = api.content.create(
+            container=self.ressources, type="Ressource", title="Room 1"
+        )
+        self.room2 = api.content.create(
+            container=self.ressources, type="Ressource", title="Room 2"
+        )
 
     def test_vocab_available_ressources(self):
         vocab_name = "collective.resourcebooking.AvailableRessources"
@@ -40,7 +50,9 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
         )
 
     def test_vocab_available_ressources_on_booking(self):
-        booking = api.content.create(container=self.bookings, type="Booking", title="Test Booking")
+        booking = api.content.create(
+            container=self.bookings, type="Booking", title="Test Booking"
+        )
         vocab_name = "collective.resourcebooking.AvailableRessources"
         factory = getUtility(IVocabularyFactory, vocab_name)
         self.assertTrue(IVocabularyFactory.providedBy(factory))

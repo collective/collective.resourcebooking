@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective.resourcebooking import _
-from collective.resourcebooking.content.ressource_booking import IRessourceBooking
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
-from Products.CMFCore.interfaces import ISiteRoot
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
@@ -23,20 +21,11 @@ class AvailableRessources(object):
     """ """
 
     def __call__(self, context):
-        def get_resource_booking_container(obj):
-            if ISiteRoot.providedBy(obj):
-                return obj
-            parent = obj.__parent__
-            if not IRessourceBooking.providedBy(parent):
-                return get_resource_booking_container(parent)
-            return parent
-
-        resource_booking = get_resource_booking_container(context)
-
+        ressource_booking = context.get_ressource_booking_container()
         items = [
             VocabItem(item.id, item.Title)
             for item in api.content.find(
-                context=resource_booking,
+                context=ressource_booking,
                 portal_type="Ressource",
                 sort_on="sortable_title",
             )

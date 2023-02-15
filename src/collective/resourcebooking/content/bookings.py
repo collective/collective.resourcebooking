@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # from plone.app.textfield import RichText
 # from plone.autoform import directives
-from plone.dexterity.content import Container
-
-# from plone.namedfile import field as namedfile
-from plone.supermodel import model
-
 # from plone.supermodel.directives import fieldset
 # from z3c.form.browser.radio import RadioFieldWidget
 # from zope import schema
+# from plone.namedfile import field as namedfile
+from collective.resourcebooking.content.ressource_booking import IRessourceBooking
+from plone.dexterity.content import Container
+from plone.supermodel import model
+from Products.CMFCore.interfaces import ISiteRoot
 from zope.interface import implementer
 
 
@@ -23,42 +23,18 @@ class IBookings(model.Schema):
 
     # model.load('bookings.xml')
 
-    # directives.widget(level=RadioFieldWidget)
-    # level = schema.Choice(
-    #     title=_(u'Sponsoring Level'),
-    #     vocabulary=LevelVocabulary,
-    #     required=True
-    # )
-
-    # text = RichText(
-    #     title=_(u'Text'),
-    #     required=False
-    # )
-
-    # url = schema.URI(
-    #     title=_(u'Link'),
-    #     required=False
-    # )
-
-    # fieldset('Images', fields=['logo', 'advertisement'])
-    # logo = namedfile.NamedBlobImage(
-    #     title=_(u'Logo'),
-    #     required=False,
-    # )
-
-    # advertisement = namedfile.NamedBlobImage(
-    #     title=_(u'Advertisement (Gold-sponsors and above)'),
-    #     required=False,
-    # )
-
-    # directives.read_permission(notes='cmf.ManagePortal')
-    # directives.write_permission(notes='cmf.ManagePortal')
-    # notes = RichText(
-    #     title=_(u'Secret Notes (only for site-admins)'),
-    #     required=False
-    # )
 
 
 @implementer(IBookings)
 class Bookings(Container):
     """Content-type class for IBookings"""
+
+    def get_ressource_booking_container(self):
+        def traverse_to_rb_container(obj):
+            if ISiteRoot.providedBy(obj):
+                return obj
+            parent = obj.__parent__
+            if not IRessourceBooking.providedBy(parent):
+                return traverse_to_rb_container(parent)
+            return parent
+        return traverse_to_rb_container(self)

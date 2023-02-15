@@ -29,6 +29,6 @@ class AvailableTimeslotsIntegrationTest(unittest.TestCase):
         vocabulary = factory(self.portal)
         self.assertTrue(IVocabularyTokenized.providedBy(vocabulary))
         self.assertEqual(
-            vocabulary.getTerm("morning").title,
+            vocabulary.getTerm(1).title,
             _("Morning"),
         )

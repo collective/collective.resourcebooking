@@ -24,8 +24,9 @@ class AvailableTimeslots(object):
         # Just an example list of content for our vocabulary,
         # this can be any static or dynamic data, a catalog result for example.
         items = [
-            VocabItem("morning", _("Morning")),
-            VocabItem("afternoon", _("Afternoon")),
+            VocabItem("", _("---")),
+            VocabItem(1, _("Morning")),
+            VocabItem(2, _("Afternoon")),
         ]
 
         # Fix context if you are using the vocabulary in DataGridField.

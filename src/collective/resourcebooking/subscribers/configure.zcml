@@ -4,8 +4,8 @@
 
  <!-- -*- extra stuff goes here -*- -->
 
-  <subscriber for="plone.dexterity.interfaces.IDexterityContent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+  <subscriber for="collective.resourcebooking.content.resource_booking.IResourceBooking
+                   zope.lifecycleevent.interfaces.IObjectAddedEvent"
               handler=".create_resources_and_bookings_container.handler"
               />
 

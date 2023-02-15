@@ -27,17 +27,17 @@ class AvailableResourcesIntegrationTest(unittest.TestCase):
         self.bookings = api.content.create(
             container=roombookings, type="Bookings", title="Bookings"
         )
-        self.ressources = api.content.create(
+        self.resources = api.content.create(
             container=roombookings, type="Resources", title="Rooms"
         )
         self.room1 = api.content.create(
-            container=self.ressources, type="Resource", title="Room 1"
+            container=self.resources, type="Resource", title="Room 1"
         )
         self.room2 = api.content.create(
-            container=self.ressources, type="Resource", title="Room 2"
+            container=self.resources, type="Resource", title="Room 2"
         )
 
-    def test_vocab_available_ressources(self):
+    def test_vocab_available_resources(self):
         booking = api.content.create(
             container=self.bookings, type="Booking", title="Test Booking 1"
         )
@@ -52,7 +52,7 @@ class AvailableResourcesIntegrationTest(unittest.TestCase):
             "Room 2",
         )
 
-    def test_vocab_available_ressources_on_booking(self):
+    def test_vocab_available_resources_on_booking(self):
         booking = api.content.create(
             container=self.bookings,
             type="Booking",

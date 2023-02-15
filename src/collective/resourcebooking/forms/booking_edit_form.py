@@ -1,13 +1,15 @@
 # from collective.resourcebooking import _
+from collective.resourcebooking.forms.booking_default_add_form import ADDFORM_FIELDS
 from plone.dexterity.browser import edit
 from z3c.form import button
+from zope.interface import implementer
 from zope.interface import Interface
-from collective.resourcebooking.forms.booking_default_add_form import ADDFORM_FIELDS
-from zope.interface import provider, implementer
+from zope.interface import provider
+
 
 class IBookingEditForm(Interface):
-    """
-    """
+    """ """
+
 
 @implementer(IBookingEditForm)
 class BookingEditForm(edit.DefaultEditForm):

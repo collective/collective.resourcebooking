@@ -4,7 +4,8 @@ from plone.autoform.form import AutoExtensibleForm
 from plone.dexterity.browser import add
 from z3c.form import button
 from z3c.form import form
-from zope.interface import Interface, implementer
+from zope.interface import implementer
+from zope.interface import Interface
 
 
 ADDFORM_FIELDS = [
@@ -37,8 +38,7 @@ class BookingDefaultAddForm(add.DefaultAddForm):
 
 
 class IBookingDefaultAddView(Interface):
-    """
-    """
+    """ """
 
 
 @implementer(IBookingDefaultAddView)

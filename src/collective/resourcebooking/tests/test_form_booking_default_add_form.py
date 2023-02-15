@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from collective.resourcebooking.forms.booking_default_add_form import (
+    IBookingDefaultAddView,
+)
 from collective.resourcebooking.testing import (
     COLLECTIVE_RESOURCEBOOKING_FUNCTIONAL_TESTING,
 )
@@ -10,7 +13,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from zope.component import getMultiAdapter
 from zope.interface.interfaces import ComponentLookupError
-from collective.resourcebooking.forms.booking_default_add_form import IBookingDefaultAddView
 
 import unittest
 
@@ -22,9 +24,15 @@ class ViewsIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        roombookings = api.content.create(self.portal, "ResourceBooking", "roombookings", "Room bookings")
-        self.bookings = api.content.create(roombookings, "Bookings", "bookings", "Bookings")
-        resources = api.content.create(roombookings, "Resources", "resources", "Resources")
+        roombookings = api.content.create(
+            self.portal, "ResourceBooking", "roombookings", "Room bookings"
+        )
+        self.bookings = api.content.create(
+            roombookings, "Bookings", "bookings", "Bookings"
+        )
+        resources = api.content.create(
+            roombookings, "Resources", "resources", "Resources"
+        )
         api.content.create(resources, "Resource", "resource1", "Resource 1")
 
     def test_booking_default_add_form_is_registered(self):

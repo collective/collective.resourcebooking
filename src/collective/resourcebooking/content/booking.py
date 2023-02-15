@@ -123,8 +123,12 @@ class IBooking(model.Schema):
             # import pdb; pdb.set_trace()  # NOQA: E702
             context = data.__context__
             resource_booking = context.get_resource_booking_container()
-            timeslot_start = get_timeslot_start(context, timeslot=data.timeslot, day=data.day)
-            timeslot_end = get_timeslot_end(context, timeslot=data.timeslot, day=data.day)
+            timeslot_start = get_timeslot_start(
+                context, timeslot=data.timeslot, day=data.day
+            )
+            timeslot_end = get_timeslot_end(
+                context, timeslot=data.timeslot, day=data.day
+            )
             res = api.content.find(
                 context=resource_booking,
                 # resource=data.resource,

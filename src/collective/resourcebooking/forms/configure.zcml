@@ -23,4 +23,12 @@
 
  <!-- -*- extra stuff goes here -*- -->
 
+  <browser:page
+    name="booking-edit-form"
+    for="collective.resourcebooking.content.booking.IBooking"
+    class=".booking_edit_form.BookingEditForm"
+    permission="cmf.ManagePortal"
+    layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
+    />
+
 </configure>

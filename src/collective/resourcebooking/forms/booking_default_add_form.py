@@ -1,16 +1,16 @@
 # from collective.resourcebooking import _
 from plone import schema
 from plone.autoform.form import AutoExtensibleForm
+from plone.dexterity.browser import add
 from z3c.form import button
 from z3c.form import form
 from zope.interface import Interface
-from plone.dexterity.browser import add
 
 
 ADDFORM_FIELDS = [
     "title",
     "ressource",
-    ]
+]
 
 
 class BookingDefaultAddForm(add.DefaultAddForm):

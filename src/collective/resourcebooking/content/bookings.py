@@ -24,7 +24,6 @@ class IBookings(model.Schema):
     # model.load('bookings.xml')
 
 
-
 @implementer(IBookings)
 class Bookings(Container):
     """Content-type class for IBookings"""
@@ -37,4 +36,5 @@ class Bookings(Container):
             if not IRessourceBooking.providedBy(parent):
                 return traverse_to_rb_container(parent)
             return parent
+
         return traverse_to_rb_container(self)

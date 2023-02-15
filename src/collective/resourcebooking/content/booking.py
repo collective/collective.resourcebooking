@@ -20,17 +20,22 @@ from zope.schema.interfaces import IVocabularyFactory
 
 
 def get_timeslot(context, timeslot):
-    timeslots_vocab_factory = getUtility(IVocabularyFactory, "collective.resourcebooking.AvailableTimeslots")
+    timeslots_vocab_factory = getUtility(
+        IVocabularyFactory, "collective.resourcebooking.AvailableTimeslots"
+    )
     vocab = timeslots_vocab_factory(context)
-    timeslots_count = len(vocab) -1
+    timeslots_count = len(vocab) - 1
     DAY_MINUTES = 1440
     timeslot_minutes = DAY_MINUTES / timeslots_count
     day_begin = datetime.combine(context.day, time())
     i = vocab.by_value.get(timeslot).value - 1
     t1 = timeslot_minutes * i
-    i +=1
+    i += 1
     t2 = (timeslot_minutes * i) - 1
-    return (day_begin + relativedelta(minutes=+t1), day_begin + relativedelta(minutes=+t2))
+    return (
+        day_begin + relativedelta(minutes=+t1),
+        day_begin + relativedelta(minutes=+t2),
+    )
 
 
 def get_timeslot_start(context, timeslot):
@@ -44,7 +49,7 @@ def get_timeslot_end(context, timeslot):
 
 
 class TimeslotUnavailable(Invalid):
-    __doc__ = _(u"The choosen timeslot is not available on that day!")
+    __doc__ = _("The choosen timeslot is not available on that day!")
 
 
 class IBooking(model.Schema):
@@ -78,7 +83,7 @@ class IBooking(model.Schema):
 
     day = schema.Date(
         title=_(
-            u'Day',
+            "Day",
         ),
         # defaultFactory=get_default_,
         required=True,
@@ -87,10 +92,10 @@ class IBooking(model.Schema):
 
     timeslot = schema.Choice(
         title=_(
-            u'Timeslot',
+            "Timeslot",
         ),
         vocabulary="collective.resourcebooking.AvailableTimeslots",
-        default=u"",
+        default="",
         # defaultFactory=get_default_timeslot,
         required=True,
         readonly=False,
@@ -123,13 +128,15 @@ class IBooking(model.Schema):
             res = api.content.find(
                 context=ressource_booking,
                 # ressource=data.ressource,
-                start={'query': timeslot_start, 'range': 'min'},
-                end={'query': timeslot_end, 'range': 'max'},
+                start={"query": timeslot_start, "range": "min"},
+                end={"query": timeslot_end, "range": "max"},
             )
             # import pdb; pdb.set_trace()  # NOQA: E702
             for booking in res:
                 if booking.UID != context.UID():
-                    raise TimeslotUnavailable(_(u"The timeslot is not available on that day."))
+                    raise TimeslotUnavailable(
+                        _("The timeslot is not available on that day.")
+                    )
 
 
 @implementer(IBooking)

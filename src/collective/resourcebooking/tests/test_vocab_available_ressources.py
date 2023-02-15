@@ -54,7 +54,10 @@ class AvailableRessourcesIntegrationTest(unittest.TestCase):
 
     def test_vocab_available_ressources_on_booking(self):
         booking = api.content.create(
-            container=self.bookings, type="Booking", title="Test Booking", id="test-booking"
+            container=self.bookings,
+            type="Booking",
+            title="Test Booking",
+            id="test-booking",
         )
         vocab_name = "collective.resourcebooking.AvailableRessources"
         factory = getUtility(IVocabularyFactory, vocab_name)

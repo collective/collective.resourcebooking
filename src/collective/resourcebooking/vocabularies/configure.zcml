@@ -11,8 +11,8 @@
 
 
     <utility
-        component=".available_ressources.AvailableRessourcesFactory"
-        name="collective.resourcebooking.AvailableRessources"
+        component=".available_resources.AvailableResourcesFactory"
+        name="collective.resourcebooking.AvailableResources"
     />
 
 

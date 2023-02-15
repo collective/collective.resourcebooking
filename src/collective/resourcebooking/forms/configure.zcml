@@ -24,10 +24,10 @@
  <!-- -*- extra stuff goes here -*- -->
 
   <browser:page
-    name="booking-edit-form"
+    name="edit"
     for="collective.resourcebooking.content.booking.IBooking"
     class=".booking_edit_form.BookingEditForm"
-    permission="cmf.ManagePortal"
+    permission="cmf.ModifyPortalContent"
     layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
     />
 

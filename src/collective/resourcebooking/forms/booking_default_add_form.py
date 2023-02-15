@@ -4,19 +4,18 @@ from plone.autoform.form import AutoExtensibleForm
 from plone.dexterity.browser import add
 from z3c.form import button
 from z3c.form import form
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 
 
 ADDFORM_FIELDS = [
     "title",
-    "ressource",
+    "resource",
 ]
 
 
 class BookingDefaultAddForm(add.DefaultAddForm):
     autoGroups = False
     portal_type = "Booking"
-
     addform_fields = ADDFORM_FIELDS
 
     def updateFieldsFromSchemata(self):
@@ -37,5 +36,11 @@ class BookingDefaultAddForm(add.DefaultAddForm):
             return self.context.absolute_url()
 
 
+class IBookingDefaultAddView(Interface):
+    """
+    """
+
+
+@implementer(IBookingDefaultAddView)
 class BookingDefaultAddView(add.DefaultAddView):
     form = BookingDefaultAddForm

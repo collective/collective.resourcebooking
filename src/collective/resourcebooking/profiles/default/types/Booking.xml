@@ -10,7 +10,7 @@
       name="title">Booking</property>
   <property
       i18n:translate=""
-      name="description">A ressource booking.</property>
+      name="description">A resource booking.</property>
 
   <property name="allow_discussion">False</property>
   <property name="factory">Booking</property>
@@ -35,12 +35,12 @@
     <element value="plone.namefromtitle"/>
     <!-- <element value="plone.allowdiscussion"/> -->
     <!-- <element value="plone.eventbasic"/> -->
-    <element value="plone.excludefromnavigation"/>
+    <!-- <element value="plone.excludefromnavigation"/> -->
     <element value="plone.shortname"/>
     <element value="plone.ownership"/>
     <!-- <element value="plone.publication"/> -->
-    <element value="plone.categorization"/>
-    <element value="plone.locking" />
+    <!-- <element value="plone.categorization"/> -->
+    <!-- <element value="plone.locking" /> -->
     <!--<element value="plone.leadimage"/>-->
     <!--<element value="plone.relateditems"/>-->
     <!--<element value="plone.richtext"/>-->

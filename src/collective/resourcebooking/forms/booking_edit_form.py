@@ -1,43 +1,27 @@
 # from collective.resourcebooking import _
-from plone import schema
-from plone.autoform.form import AutoExtensibleForm
+from plone.dexterity.browser import edit
 from z3c.form import button
-from z3c.form import form
 from zope.interface import Interface
-
+from collective.resourcebooking.forms.booking_default_add_form import ADDFORM_FIELDS
+from zope.interface import provider, implementer
 
 class IBookingEditForm(Interface):
-    """Schema Interface for IBookingEditForm
-    Define your form fields here.
+    """
     """
 
-    name = schema.TextLine(
-        title="Your name",
-    )
+@implementer(IBookingEditForm)
+class BookingEditForm(edit.DefaultEditForm):
+    # portal_type = "Booking"
+    addform_fields = ADDFORM_FIELDS
 
+    # label = "What's your name?"
+    # description = "Simple, sample form"
 
-class BookingEditForm(AutoExtensibleForm, form.EditForm):
-    schema = IBookingEditForm
-    ignoreContext = True
-
-    label = "What's your name?"
-    description = "Simple, sample form"
-
-    @button.buttonAndHandler("Ok")
-    def handleApply(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-
-        # Do something with valid data here
-
-        changes = self.applyChanges(data)
-        # Set status on this form page
-        # (this status message is not bind to the session and does not go thru redirects)
-        if changes:
-            self.status = "Settings saved"
-
-    @button.buttonAndHandler("Cancel")
-    def handleCancel(self, action):
-        """User canceled. Redirect back to the front page."""
+    def updateFieldsFromSchemata(self):
+        super().updateFieldsFromSchemata()
+        # filter out fields which are in addform_fields
+        for field_name in self.fields:
+            if field_name == "title":
+                continue
+            if field_name in self.addform_fields:
+                self.fields[field_name].mode = "display"

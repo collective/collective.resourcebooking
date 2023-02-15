@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from collective.resourcebooking.content.ressources import IRessources  # NOQA E501
+from collective.resourcebooking.content.resource_booking import (
+    IResourceBooking,  # NOQA E501
+)
 from collective.resourcebooking.testing import (  # noqa
     COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING,
 )
@@ -14,7 +16,7 @@ from zope.component import queryUtility
 import unittest
 
 
-class RessourcesIntegrationTest(unittest.TestCase):
+class ResourceBookingIntegrationTest(unittest.TestCase):
 
     layer = COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING
 
@@ -22,72 +24,65 @@ class RessourcesIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        portal_types = self.portal.portal_types
-        parent_id = portal_types.constructContent(
-            "RessourceBooking",
-            self.portal,
-            "parent_container",
-            title="Parent container",
-        )
-        self.parent = self.portal[parent_id]
+        self.parent = self.portal
 
-    def test_ct_ressources_schema(self):
-        fti = queryUtility(IDexterityFTI, name="Ressources")
+    def test_ct_resource_booking_schema(self):
+        fti = queryUtility(IDexterityFTI, name="ResourceBooking")
         schema = fti.lookupSchema()
-        self.assertEqual(IRessources, schema)
+        self.assertEqual(IResourceBooking, schema)
 
-    def test_ct_ressources_fti(self):
-        fti = queryUtility(IDexterityFTI, name="Ressources")
+    def test_ct_resource_booking_fti(self):
+        fti = queryUtility(IDexterityFTI, name="ResourceBooking")
         self.assertTrue(fti)
 
-    def test_ct_ressources_factory(self):
-        fti = queryUtility(IDexterityFTI, name="Ressources")
+    def test_ct_resource_booking_factory(self):
+        fti = queryUtility(IDexterityFTI, name="ResourceBooking")
         factory = fti.factory
         obj = createObject(factory)
 
         self.assertTrue(
-            IRessources.providedBy(obj),
-            "IRessources not provided by {0}!".format(
+            IResourceBooking.providedBy(obj),
+            "IResourceBooking not provided by {0}!".format(
                 obj,
             ),
         )
 
-    def test_ct_ressources_adding(self):
+    def test_ct_resource_booking_adding(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
         obj = api.content.create(
-            container=self.parent,
-            type="Ressources",
-            id="ressources",
+            container=self.portal,
+            type="ResourceBooking",
+            id="resource_booking",
         )
 
         self.assertTrue(
-            IRessources.providedBy(obj),
-            "IRessources not provided by {0}!".format(
+            IResourceBooking.providedBy(obj),
+            "IResourceBooking not provided by {0}!".format(
                 obj.id,
             ),
         )
 
         parent = obj.__parent__
-        self.assertIn("ressources", parent.objectIds())
+        self.assertIn("resource_booking", parent.objectIds())
 
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertNotIn("ressources", parent.objectIds())
+        self.assertNotIn("resource_booking", parent.objectIds())
 
-    def test_ct_ressources_globally_not_addable(self):
+    def test_ct_resource_booking_globally_addable(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
-        fti = queryUtility(IDexterityFTI, name="Ressources")
-        self.assertFalse(fti.global_allow, "{0} is globally addable!".format(fti.id))
+        fti = queryUtility(IDexterityFTI, name="ResourceBooking")
+        self.assertTrue(fti.global_allow, "{0} is not globally addable!".format(fti.id))
 
-    def test_ct_ressources_filter_content_type_true(self):
+    def test_ct_resource_booking_filter_content_type_true(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
-        fti = queryUtility(IDexterityFTI, name="Ressources")
+        fti = queryUtility(IDexterityFTI, name="ResourceBooking")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
             fti.id,
             self.portal,
-            "ressources_id",
-            title="Ressources container",
+            "resource_booking_id",
+            title="ResourceBooking container",
         )
         self.parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):

@@ -11,7 +11,7 @@
     </permission>
 
 
-    <permission name="collective.resourcebooking: Add Ressource" acquire="True">
+    <permission name="collective.resourcebooking: Add Resource" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
@@ -27,7 +27,7 @@
     </permission>
 
 
-    <permission name="collective.resourcebooking: Add Ressources" acquire="True">
+    <permission name="collective.resourcebooking: Add Resources" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
@@ -35,7 +35,7 @@
     </permission>
 
 
-    <permission name="collective.resourcebooking: Add RessourceBooking" acquire="True">
+    <permission name="collective.resourcebooking: Add ResourceBooking" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>

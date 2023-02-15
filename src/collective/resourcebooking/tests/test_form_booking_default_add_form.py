@@ -10,6 +10,7 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from zope.component import getMultiAdapter
 from zope.interface.interfaces import ComponentLookupError
+from collective.resourcebooking.forms.booking_default_add_form import IBookingDefaultAddView
 
 import unittest
 
@@ -21,22 +22,15 @@ class ViewsIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        api.content.create(self.portal, "Folder", "other-folder")
-        api.content.create(self.portal, "Document", "front-page")
+        roombookings = api.content.create(self.portal, "ResourceBooking", "roombookings", "Room bookings")
+        self.bookings = api.content.create(roombookings, "Bookings", "bookings", "Bookings")
+        resources = api.content.create(roombookings, "Resources", "resources", "Resources")
+        api.content.create(resources, "Resource", "resource1", "Resource 1")
 
     def test_booking_default_add_form_is_registered(self):
-        view = getMultiAdapter(
-            (self.portal["other-folder"], self.portal.REQUEST),
-            name="booking-default-add-form",
-        )
-        self.assertTrue(view.__name__ == "booking-default-add-form")
-
-    def test_booking_default_add_form_not_matching_interface(self):
-        with self.assertRaises(ComponentLookupError):
-            getMultiAdapter(
-                (self.portal["front-page"], self.portal.REQUEST),
-                name="booking-default-add-form",
-            )
+        view = self.bookings.unrestrictedTraverse("++add++Booking")
+        self.assertTrue(view.__name__ == "Booking")
+        self.assertTrue(IBookingDefaultAddView.providedBy(view))
 
 
 class ViewsFunctionalTest(unittest.TestCase):

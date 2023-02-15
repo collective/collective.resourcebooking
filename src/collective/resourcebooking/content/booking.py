@@ -19,7 +19,7 @@ from zope.interface import invariant
 from zope.schema.interfaces import IVocabularyFactory
 
 
-def get_timeslot(context, timeslot):
+def get_timeslot(context, timeslot=None, day=None):
     timeslots_vocab_factory = getUtility(
         IVocabularyFactory, "collective.resourcebooking.AvailableTimeslots"
     )
@@ -27,7 +27,7 @@ def get_timeslot(context, timeslot):
     timeslots_count = len(vocab) - 1
     DAY_MINUTES = 1440
     timeslot_minutes = DAY_MINUTES / timeslots_count
-    day_begin = datetime.combine(context.day, time())
+    day_begin = datetime.combine(day, time())
     i = vocab.by_value.get(timeslot).value - 1
     t1 = timeslot_minutes * i
     i += 1
@@ -38,14 +38,14 @@ def get_timeslot(context, timeslot):
     )
 
 
-def get_timeslot_start(context, timeslot):
-    timeslot = get_timeslot(context, timeslot)
-    return timeslot[0]
+def get_timeslot_start(context, timeslot=None, day=None):
+    timeslots = get_timeslot(context, timeslot=timeslot, day=day)
+    return timeslots[0]
 
 
-def get_timeslot_end(context, timeslot):
-    timeslot = get_timeslot(context, timeslot)
-    return timeslot[1]
+def get_timeslot_end(context, timeslot=None, day=None):
+    timeslots = get_timeslot(context, timeslot=timeslot, day=day)
+    return timeslots[1]
 
 
 class TimeslotUnavailable(Invalid):
@@ -55,8 +55,8 @@ class TimeslotUnavailable(Invalid):
 class IBooking(model.Schema):
     """Marker interface and Dexterity Python Schema for Booking"""
 
-    def get_ressource_booking_container(self):
-        return self.__parent__.get_ressource_booking_container()
+    def get_resource_booking_container(self):
+        return self.__parent__.get_resource_booking_container()
 
     directives.mode(title="hidden")
     title = schema.TextLine(
@@ -67,16 +67,16 @@ class IBooking(model.Schema):
         readonly=False,
     )
 
-    ressource = schema.Choice(
+    resource = schema.Choice(
         title=_(
-            "Ressource",
+            "Resource",
         ),
         description=_(
-            "Choose a ressource to book",
+            "Choose a resource to book",
         ),
-        vocabulary="collective.resourcebooking.AvailableRessources",
+        vocabulary="collective.resourcebooking.AvailableResources",
         default="",
-        # defaultFactory=get_default_ressource,
+        # defaultFactory=get_default_resource,
         required=True,
         readonly=False,
     )
@@ -122,12 +122,12 @@ class IBooking(model.Schema):
         if data.timeslot is not None:
             # import pdb; pdb.set_trace()  # NOQA: E702
             context = data.__context__
-            ressource_booking = context.get_ressource_booking_container()
-            timeslot_start = get_timeslot_start(context, data.timeslot)
-            timeslot_end = get_timeslot_end(context, data.timeslot)
+            resource_booking = context.get_resource_booking_container()
+            timeslot_start = get_timeslot_start(context, timeslot=data.timeslot, day=data.day)
+            timeslot_end = get_timeslot_end(context, timeslot=data.timeslot, day=data.day)
             res = api.content.find(
-                context=ressource_booking,
-                # ressource=data.ressource,
+                context=resource_booking,
+                # resource=data.resource,
                 start={"query": timeslot_start, "range": "min"},
                 end={"query": timeslot_end, "range": "max"},
             )
@@ -146,8 +146,8 @@ class Booking(Item):
     @property
     def title(self):
         computed_title = ""
-        if hasattr(self, "ressource"):
-            computed_title = self.ressource
+        if hasattr(self, "resource"):
+            computed_title = self.resource
         if hasattr(self, "day") and hasattr(self, "timeslot"):
             computed_title += f": {self.day.isoformat()}-{self.timeslot}"
         return computed_title
@@ -160,7 +160,7 @@ class Booking(Item):
     def start(self):
         if not self.timeslot:
             return datetime.today()
-        timeslot = get_timeslot_start(self, self.timeslot)
+        timeslot = get_timeslot_start(self, timeslot=self.timeslot, day=self.day)
         return timeslot
 
     @start.setter
@@ -171,7 +171,7 @@ class Booking(Item):
     def end(self):
         if not self.timeslot:
             return datetime.today()
-        timeslot = get_timeslot_end(self, self.timeslot)
+        timeslot = get_timeslot_end(self, timeslot=self.timeslot, day=self.day)
         return timeslot
 
     @end.setter

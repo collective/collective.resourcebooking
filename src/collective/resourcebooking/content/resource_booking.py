@@ -15,13 +15,13 @@ from zope.interface import implementer
 # from collective.resourcebooking import _
 
 
-class IRessourceBooking(model.Schema):
-    """Marker interface and Dexterity Python Schema for RessourceBooking"""
+class IResourceBooking(model.Schema):
+    """Marker interface and Dexterity Python Schema for ResourceBooking"""
 
     # If you want, you can load a xml model created TTW here
     # and customize it in Python:
 
-    # model.load('ressource_booking.xml')
+    # model.load('resource_booking.xml')
 
     # directives.widget(level=RadioFieldWidget)
     # level = schema.Choice(
@@ -59,6 +59,6 @@ class IRessourceBooking(model.Schema):
     # )
 
 
-@implementer(IRessourceBooking)
-class RessourceBooking(Container):
-    """Content-type class for IRessourceBooking"""
+@implementer(IResourceBooking)
+class ResourceBooking(Container):
+    """Content-type class for IResourceBooking"""

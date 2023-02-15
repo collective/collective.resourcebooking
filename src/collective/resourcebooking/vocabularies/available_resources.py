@@ -17,16 +17,16 @@ class VocabItem(object):
 
 
 @implementer(IVocabularyFactory)
-class AvailableRessources(object):
+class AvailableResources(object):
     """ """
 
     def __call__(self, context):
-        ressource_booking = context.get_ressource_booking_container()
+        resource_booking = context.get_resource_booking_container()
         items = [
             VocabItem(item.id, item.Title)
             for item in api.content.find(
-                context=ressource_booking,
-                portal_type="Ressource",
+                context=resource_booking,
+                portal_type="Resource",
                 sort_on="sortable_title",
             )
             if item
@@ -51,4 +51,4 @@ class AvailableRessources(object):
         return SimpleVocabulary(terms)
 
 
-AvailableRessourcesFactory = AvailableRessources()
+AvailableResourcesFactory = AvailableResources()

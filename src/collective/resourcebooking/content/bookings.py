@@ -5,7 +5,7 @@
 # from z3c.form.browser.radio import RadioFieldWidget
 # from zope import schema
 # from plone.namedfile import field as namedfile
-from collective.resourcebooking.content.ressource_booking import IRessourceBooking
+from collective.resourcebooking.content.resource_booking import IResourceBooking
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from Products.CMFCore.interfaces import ISiteRoot
@@ -28,12 +28,12 @@ class IBookings(model.Schema):
 class Bookings(Container):
     """Content-type class for IBookings"""
 
-    def get_ressource_booking_container(self):
+    def get_resource_booking_container(self):
         def traverse_to_rb_container(obj):
             if ISiteRoot.providedBy(obj):
                 return obj
             parent = obj.__parent__
-            if not IRessourceBooking.providedBy(parent):
+            if not IResourceBooking.providedBy(parent):
                 return traverse_to_rb_container(parent)
             return parent
 

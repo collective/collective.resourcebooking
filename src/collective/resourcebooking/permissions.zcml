@@ -13,8 +13,8 @@
 
 
     <permission
-        id="collective.resourcebooking.AddRessource"
-        title="collective.resourcebooking: Add Ressource"
+        id="collective.resourcebooking.AddResource"
+        title="collective.resourcebooking: Add Resource"
     />
 
 
@@ -25,14 +25,14 @@
 
 
     <permission
-        id="collective.resourcebooking.AddRessources"
-        title="collective.resourcebooking: Add Ressources"
+        id="collective.resourcebooking.AddResources"
+        title="collective.resourcebooking: Add Resources"
     />
 
 
     <permission
-        id="collective.resourcebooking.AddRessourceBooking"
-        title="collective.resourcebooking: Add RessourceBooking"
+        id="collective.resourcebooking.AddResourceBooking"
+        title="collective.resourcebooking: Add ResourceBooking"
     />
 
 

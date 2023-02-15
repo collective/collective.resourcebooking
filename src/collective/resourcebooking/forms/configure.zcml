@@ -4,14 +4,23 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.resourcebooking">
 
- <!-- -*- extra stuff goes here -*- -->
+  <!-- customize default dexterity add form for Booking -->
+  <adapter
+      factory="collective.resourcebooking.forms.booking_default_add_form.BookingDefaultAddView"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      for="Products.CMFCore.interfaces.IFolderish
+           collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      name="Booking"
+      />
 
-  <browser:page
-    name="booking-default-add-form"
-    for="collective.resourcebooking.content.booking.IBooking"
-    class=".booking_default_add_form.BookingDefaultAddForm"
-    permission="cmf.ManagePortal"
-    layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
-    />
+  <class class="collective.resourcebooking.forms.booking_default_add_form.BookingDefaultAddView">
+    <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"
+        />
+  </class>
+
+ <!-- -*- extra stuff goes here -*- -->
 
 </configure>

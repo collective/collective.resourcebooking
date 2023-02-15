@@ -27,29 +27,22 @@
     :alt: License
 
 
-==========================
-collective.resourcebooking
-==========================
+================================
+collective.resourcebooking (WIP)
+================================
 
 Allow users to book resources like rooms in Plone
 
 Features
 --------
 
-- Can be bullet points
+- You can add multiple resource booking container in a Plone site, to manage different resources.
+- Every resource booking container has a resources and a bookings container
+- Create your resources you want to make bookable in the resources container
+- Create bookings in the bookings container
+- For now there are two time slots per day available "Morning", "Afternoon".
 
 
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
 
 
 Translations
@@ -57,7 +50,8 @@ Translations
 
 This product has been translated into
 
-- Klingon (thanks, K'Plai)
+- English
+
 
 
 Installation
@@ -76,10 +70,10 @@ Install collective.resourcebooking by adding it to your buildout::
 and then running ``bin/buildout``
 
 
-Authors
--------
+Maintainers
+-----------
 
-Provided by awesome people ;)
+- Maik Derstappen - MrTango <md@derico.de>
 
 
 Contributors
@@ -95,14 +89,13 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/collective.resourcebooking/issues
 - Source Code: https://github.com/collective/collective.resourcebooking
-- Documentation: https://docs.plone.org/foo/bar
+
 
 
 Support
 -------
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+If you are having issues, please let us know and open an issue.
 
 
 License

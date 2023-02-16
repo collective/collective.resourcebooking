@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collective.resourcebooking import _
+# from collective.resourcebooking import _
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from zope.globalrequest import getRequest

@@ -1,9 +1,5 @@
 # from collective.resourcebooking import _
-from plone import schema
-from plone.autoform.form import AutoExtensibleForm
 from plone.dexterity.browser import add
-from z3c.form import button
-from z3c.form import form
 from zope.interface import implementer
 from zope.interface import Interface
 

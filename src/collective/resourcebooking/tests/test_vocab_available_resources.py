@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.resourcebooking import _
+# from collective.resourcebooking import _
 from collective.resourcebooking.testing import (  # noqa
     COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING,
 )
@@ -24,12 +24,14 @@ class AvailableResourcesIntegrationTest(unittest.TestCase):
         roombookings = api.content.create(
             container=self.portal, type="ResourceBooking", title="roombookings"
         )
-        self.bookings = api.content.create(
-            container=roombookings, type="Bookings", title="Bookings"
-        )
-        self.resources = api.content.create(
-            container=roombookings, type="Resources", title="Rooms"
-        )
+        # self.bookings = api.content.create(
+        #     container=roombookings, type="Bookings", title="Bookings"
+        # )
+        # self.resources = api.content.create(
+        #     container=roombookings, type="Resources", title="Rooms"
+        # )
+        self.bookings = roombookings["bookings"]
+        self.resources = roombookings["resources"]
         self.room1 = api.content.create(
             container=self.resources, type="Resource", title="Room 1"
         )

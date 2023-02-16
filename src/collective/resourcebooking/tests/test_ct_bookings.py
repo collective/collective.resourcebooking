@@ -57,7 +57,7 @@ class BookingsIntegrationTest(unittest.TestCase):
         obj = api.content.create(
             container=self.parent,
             type="Bookings",
-            id="bookings",
+            id="bookings2",
         )
 
         self.assertTrue(
@@ -68,11 +68,11 @@ class BookingsIntegrationTest(unittest.TestCase):
         )
 
         parent = obj.__parent__
-        self.assertIn("bookings", parent.objectIds())
+        self.assertIn("bookings2", parent.objectIds())
 
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertNotIn("bookings", parent.objectIds())
+        self.assertNotIn("bookings2", parent.objectIds())
 
     def test_ct_bookings_globally_not_addable(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])

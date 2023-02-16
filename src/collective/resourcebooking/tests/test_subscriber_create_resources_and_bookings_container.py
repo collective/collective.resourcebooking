@@ -7,6 +7,7 @@ from collective.resourcebooking.testing import (
 )
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone import api
 
 import unittest
 
@@ -18,6 +19,16 @@ class SubscriberIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+    def test_subscriber_added_resources_and_bookings_container(self):
+        resource_booking = api.content.create(
+            container=self.portal,
+            type="ResourceBooking",
+            id="resource_booking",
+        )
+
+        self.assertIn("resources", resource_booking.objectIds())
+        self.assertIn("bookings", resource_booking.objectIds())
 
 
 class SubscriberFunctionalTest(unittest.TestCase):

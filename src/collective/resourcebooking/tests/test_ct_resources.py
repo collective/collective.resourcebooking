@@ -57,7 +57,7 @@ class ResourcesIntegrationTest(unittest.TestCase):
         obj = api.content.create(
             container=self.parent,
             type="Resources",
-            id="resources",
+            id="resources2",
         )
 
         self.assertTrue(
@@ -68,11 +68,11 @@ class ResourcesIntegrationTest(unittest.TestCase):
         )
 
         parent = obj.__parent__
-        self.assertIn("resources", parent.objectIds())
+        self.assertIn("resources2", parent.objectIds())
 
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertNotIn("resources", parent.objectIds())
+        self.assertNotIn("resources2", parent.objectIds())
 
     def test_ct_resources_globally_not_addable(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])

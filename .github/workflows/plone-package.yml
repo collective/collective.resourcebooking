@@ -62,9 +62,9 @@ jobs:
               env:
                 PLONE-VERSION: ${{ matrix.plone-version }}
                 PYTHON-VERSION: ${{ matrix.python-version }}
-            - name: "Upload coverage to Codecov"
-              uses: "codecov/codecov-action@v3"
-              with:
-                fail_ci_if_error: false
-                verbose: true
-              if: matrix.python-version == '3.9'
+            # - name: "Upload coverage to Codecov"
+            #   uses: "codecov/codecov-action@v3"
+            #   with:
+            #     fail_ci_if_error: false
+            #     verbose: true
+            #   if: matrix.python-version == '3.9'

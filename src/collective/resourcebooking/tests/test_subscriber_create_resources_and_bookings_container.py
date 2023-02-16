@@ -5,9 +5,9 @@ from collective.resourcebooking.testing import (
 from collective.resourcebooking.testing import (
     COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING,
 )
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone import api
 
 import unittest
 

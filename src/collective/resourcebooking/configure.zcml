@@ -57,6 +57,8 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <include package=".views" />
+
   <include package=".subscribers" />
 
   <include package=".forms" />

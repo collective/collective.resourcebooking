@@ -8,10 +8,15 @@
   <metal:content-core fill-slot="content-core">
   <metal:block define-macro="content-core">
 
-      <h2 i18n:translate="">Sample View</h2>
-      <!--<div tal:replace="view/my_custom_view_method" />-->
-      <!--<div tal:replace="context/my_custom_field" />-->
+  <h2>This week</h2>
+  <ul>
+    <li tal:repeat="item view/current_week_bookings"><a href="${item/getURL}">${item/resource} - ${item/day} - ${item/timeslot}</a></li>
+  </ul>
 
+  <h2>Next week</h2>
+  <ul>
+    <li tal:repeat="item view/next_week_bookings"><a href="${item/getURL}">${item/resource} - ${item/day} - ${item/timeslot}</a></li>
+  </ul>
   </metal:block>
   </metal:content-core>
 </body>

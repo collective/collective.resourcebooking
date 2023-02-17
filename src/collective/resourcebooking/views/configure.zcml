@@ -8,7 +8,7 @@
 
   <browser:page
     name="view"
-    for="collective.resourcebooking.content.bookings.IBookings"
+    for="collective.resourcebooking.content.resource_booking.IResourceBooking"
     class=".bookings_view.BookingsView"
     template="bookings_view.pt"
     permission="zope2.View"

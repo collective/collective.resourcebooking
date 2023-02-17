@@ -14,14 +14,13 @@ class BookingEditForm(edit.DefaultEditForm):
     # portal_type = "Booking"
     addform_fields = ADDFORM_FIELDS
 
-    # label = "What's your name?"
-    # description = "Simple, sample form"
-
     def updateFieldsFromSchemata(self):
         super().updateFieldsFromSchemata()
         # filter out fields which are in addform_fields
         for field_name in self.fields:
             if field_name == "title":
+                continue
+            if field_name == "description":
                 continue
             if field_name in self.addform_fields:
                 self.fields[field_name].mode = "display"

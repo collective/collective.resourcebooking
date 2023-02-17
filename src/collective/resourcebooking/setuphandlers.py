@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
 
@@ -19,6 +20,10 @@ class HiddenProfiles(object):
 def post_install(context):
     """Post install script"""
     # Do something at the end of the installation of this package.
+    loadMigrationProfile(
+        context,
+        "profile-collective.resourcebooking:z-conditionals",
+    )
 
 
 def uninstall(context):

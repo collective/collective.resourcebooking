@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # from collective.resourcebooking import _
+from datetime import date
+from dateutil.relativedelta import MO
+from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import SU
+from plone import api
 from Products.Five.browser import BrowserView
 from zope.interface import Interface
-from plone import api
-from datetime import date
-from dateutil.relativedelta import relativedelta, MO, SU
 
 
 class IBookingsView(Interface):
@@ -13,7 +15,6 @@ class IBookingsView(Interface):
 
 
 class BookingsView(BrowserView):
-
     def __call__(self):
         week_dates = self.get_week_dates()
         print(week_dates)
@@ -38,18 +39,18 @@ class BookingsView(BrowserView):
             end={
                 "query": week_start,
                 "range": "min",
-            }
+            },
         )
         return bookings
 
     def get_week_dates(self):
         today = date.today()
-        current_week_start = today+relativedelta(weekday=MO(-1))
-        current_week_end = today+relativedelta(weekday=SU)
-        next_week_start = today+relativedelta(weekday=MO(+1))
-        next_week_end = today+relativedelta(weekday=SU(+2))
-        nextnext_week_start = today+relativedelta(weekday=MO(+2))
-        nextnext_week_end = today+relativedelta(weekday=SU(+3))
+        current_week_start = today + relativedelta(weekday=MO(-1))
+        current_week_end = today + relativedelta(weekday=SU)
+        next_week_start = today + relativedelta(weekday=MO(+1))
+        next_week_end = today + relativedelta(weekday=SU(+2))
+        nextnext_week_start = today + relativedelta(weekday=MO(+2))
+        nextnext_week_end = today + relativedelta(weekday=SU(+3))
         return {
             "current_week": (current_week_start, current_week_end),
             "next_week": (next_week_start, next_week_end),

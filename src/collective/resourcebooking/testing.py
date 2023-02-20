@@ -28,7 +28,6 @@ class CollectiveResourcebookingLayer(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "collective.resourcebooking:default")
-        applyProfile(portal, "collective.resourcebooking:install-base")
 
 
 COLLECTIVE_RESOURCEBOOKING_FIXTURE = CollectiveResourcebookingLayer()

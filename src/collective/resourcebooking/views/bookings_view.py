@@ -7,6 +7,7 @@ from dateutil.relativedelta import relativedelta
 from dateutil.relativedelta import SU
 from plone import api
 from Products.Five.browser import BrowserView
+from zope.interface import implementer
 from zope.interface import Interface
 
 
@@ -14,6 +15,7 @@ class IBookingsView(Interface):
     """Marker Interface for IBookingsView"""
 
 
+@implementer(IBookingsView)
 class BookingsView(BrowserView):
     def __call__(self):
         week_dates = self.get_week_dates()

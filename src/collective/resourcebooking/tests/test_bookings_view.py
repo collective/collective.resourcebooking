@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from collective.resourcebooking.testing import (
-    COLLECTIVE_RESOURCEBOOKING_FUNCTIONAL_TESTING,
-)
-from collective.resourcebooking.testing import (
-    COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING,
-)
+from collective.resourcebooking.testing import COLLECTIVE_RESOURCEBOOKING_FUNCTIONAL_TESTING
+from collective.resourcebooking.testing import COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING
+from collective.resourcebooking.views.bookings_view import IBookingsView
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -21,24 +18,26 @@ class ViewsIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        api.content.create(self.portal, "Folder", "other-folder")
+        self.roombookings = api.content.create(
+            container=self.portal, type="ResourceBooking", title="roombookings"
+        )
+        self.booking = api.content.create(
+            container=self.roombookings["bookings"], type="Booking", title="Test Booking 1"
+        )
         api.content.create(self.portal, "Document", "front-page")
 
     def test_view_is_registered(self):
         view = getMultiAdapter(
-            (self.portal["other-folder"], self.portal.REQUEST), name="view"
+            (self.roombookings, self.portal.REQUEST), name="view"
         )
         self.assertTrue(view.__name__ == "view")
-        # self.assertTrue(
-        #     'Sample View' in view(),
-        #     'Sample View is not found in view'
-        # )
+        self.assertTrue(IBookingsView.providedBy(view))
 
     def test_view_not_matching_interface(self):
-        with self.assertRaises(ComponentLookupError):
-            getMultiAdapter(
-                (self.portal["front-page"], self.portal.REQUEST), name="view"
-            )
+        view = getMultiAdapter(
+            (self.portal["front-page"], self.portal.REQUEST), name="view"
+        )
+        self.assertFalse(IBookingsView.providedBy(view))
 
 
 class ViewsFunctionalTest(unittest.TestCase):

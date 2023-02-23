@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-from collective.resourcebooking.testing import COLLECTIVE_RESOURCEBOOKING_FUNCTIONAL_TESTING
-from collective.resourcebooking.testing import COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING
+from collective.resourcebooking.testing import (
+    COLLECTIVE_RESOURCEBOOKING_FUNCTIONAL_TESTING,
+)
+from collective.resourcebooking.testing import (
+    COLLECTIVE_RESOURCEBOOKING_INTEGRATION_TESTING,
+)
 from collective.resourcebooking.views.bookings_view import IBookingsView
 from plone import api
 from plone.app.testing import setRoles
@@ -22,14 +26,14 @@ class ViewsIntegrationTest(unittest.TestCase):
             container=self.portal, type="ResourceBooking", title="roombookings"
         )
         self.booking = api.content.create(
-            container=self.roombookings["bookings"], type="Booking", title="Test Booking 1"
+            container=self.roombookings["bookings"],
+            type="Booking",
+            title="Test Booking 1",
         )
         api.content.create(self.portal, "Document", "front-page")
 
     def test_view_is_registered(self):
-        view = getMultiAdapter(
-            (self.roombookings, self.portal.REQUEST), name="view"
-        )
+        view = getMultiAdapter((self.roombookings, self.portal.REQUEST), name="view")
         self.assertTrue(view.__name__ == "view")
         self.assertTrue(IBookingsView.providedBy(view))
 

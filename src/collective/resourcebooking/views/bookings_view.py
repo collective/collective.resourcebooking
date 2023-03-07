@@ -9,6 +9,9 @@ from plone import api
 from Products.Five.browser import BrowserView
 from zope.interface import implementer
 from zope.interface import Interface
+from ..vocabularies.utils import get_vocab_term
+from ..content.booking import IBooking
+import zope.schema
 
 
 class IBookingsView(Interface):
@@ -18,21 +21,26 @@ class IBookingsView(Interface):
 @implementer(IBookingsView)
 class BookingsView(BrowserView):
     def __call__(self):
+        self.date = date.today()
+        rdate = self.request.get("date")
+        if rdate:
+            self.date = date.fromisoformat(rdate)
         week_dates = self.get_week_dates()
         print(week_dates)
-        self.current_week_bookings = self.find_bookings(
+        current_week_bookings = self.find_bookings(
             week_dates["current_week"][0],
             week_dates["current_week"][1],
         )
-        self.next_week_bookings = self.find_bookings(
-            week_dates["next_week"][0],
-            week_dates["next_week"][1],
-        )
+        self.current_week_bookings = self.resolve_vocabularies(current_week_bookings)
+        # self.next_week_bookings = self.find_bookings(
+        #     week_dates["next_week"][0],
+        #     week_dates["next_week"][1],
+        # )
         return self.index()
 
     def find_bookings(self, week_start, week_end):
         bookings = api.content.find(
-            container=self.context,
+            context=self.context,
             portal_type="Booking",
             start={
                 "query": week_end,
@@ -45,8 +53,22 @@ class BookingsView(BrowserView):
         )
         return bookings
 
+    def resolve_vocabularies(self, bookings):
+        resolved_bookings = []
+        fields = zope.schema.getFields(IBooking)
+        for brain in bookings:
+            booking = brain.getObject()
+            booking_info = {}
+            booking_info["resource"] = get_vocab_term(booking, fields['resource'], booking.resource)['title']
+            booking_info["timeslot"] = get_vocab_term(booking, fields['timeslot'], booking.timeslot)['title']
+            booking_info["day"] = booking.day.isoformat()
+            booking_info['url'] = booking.absolute_url()
+            resolved_bookings.append(booking_info)
+        print(resolved_bookings)
+        return resolved_bookings
+
     def get_week_dates(self):
-        today = date.today()
+        today = self.date
         current_week_start = today + relativedelta(weekday=MO(-1))
         current_week_end = today + relativedelta(weekday=SU)
         next_week_start = today + relativedelta(weekday=MO(+1))

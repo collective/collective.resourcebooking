@@ -20,35 +20,35 @@ msgstr ""
 
 #: collective/resourcebooking/profiles/default/types/Resource.xml
 msgid "A bookable resource."
-msgstr ""
+msgstr "Eine buchbare Ressource"
 
 #: collective/resourcebooking/profiles/default/types/Bookings.xml
 msgid "A container holding resources bookings."
-msgstr ""
+msgstr "Ein Kontainer welcher Buchungen enthält"
 
 #: collective/resourcebooking/profiles/default/types/ResourceBooking.xml
 msgid "A container to hold available resources and there bookings"
-msgstr ""
+msgstr "Ein Kontainer welcher verfügbare Ressourcen und deren Buchungen enthält"
 
 #: collective/resourcebooking/profiles/default/types/Booking.xml
 msgid "A resource booking."
-msgstr ""
+msgstr "Eine Buchung"
 
 #: collective/resourcebooking/vocabularies/available_timeslots.py:29
 msgid "Afternoon"
-msgstr ""
+msgstr "Nachmittag"
 
 #: collective/resourcebooking/profiles/default/types/Booking.xml
 msgid "Booking"
-msgstr ""
+msgstr "Buchung"
 
 #: collective/resourcebooking/profiles/default/types/Bookings.xml
 msgid "Bookings"
-msgstr ""
+msgstr "Buchungen"
 
 #: collective/resourcebooking/content/booking.py:74
 msgid "Choose a resource to book"
-msgstr ""
+msgstr "Wähle eine zu buchende Ressource"
 
 #: collective/resourcebooking/content/booking.py:63
 msgid "Computed Title"
@@ -56,15 +56,15 @@ msgstr ""
 
 #: collective/resourcebooking/profiles/default/types/Resources.xml
 msgid "Container holding available resources to book."
-msgstr ""
+msgstr "Kontainer welcher verfügbare Ressourcen enthält"
 
 #: collective/resourcebooking/content/booking.py:85
 msgid "Day"
-msgstr ""
+msgstr "Tag"
 
 #: collective/resourcebooking/content/booking.py:114
 msgid "End"
-msgstr ""
+msgstr "Ende"
 
 #: collective/resourcebooking/configure.zcml:27
 msgid "Installs the collective.resourcebooking add-on."
@@ -72,36 +72,36 @@ msgstr ""
 
 #: collective/resourcebooking/vocabularies/available_timeslots.py:28
 msgid "Morning"
-msgstr ""
+msgstr "Vormittag"
 
 #: collective/resourcebooking/content/booking.py:71
 #: collective/resourcebooking/profiles/default/types/Resource.xml
 msgid "Resource"
-msgstr ""
+msgstr "Ressource"
 
 #: collective/resourcebooking/profiles/default/types/ResourceBooking.xml
 msgid "ResourceBooking"
-msgstr ""
+msgstr "Ressourcenbuchung"
 
 #: collective/resourcebooking/profiles/default/types/Resources.xml
 msgid "Resources"
-msgstr ""
+msgstr "Ressourcen"
 
 #: collective/resourcebooking/content/booking.py:106
 msgid "Start"
-msgstr ""
+msgstr "Beginn"
 
 #: collective/resourcebooking/content/booking.py:52
 msgid "The choosen timeslot is not available on that day!"
-msgstr ""
+msgstr "Der gewählte Zeitslot ist nicht verfügbar!"
 
 #: collective/resourcebooking/content/booking.py:142
 msgid "The timeslot is not available on that day."
-msgstr ""
+msgstr "Der gewählte Zeitslot ist nicht verfügbar!"
 
 #: collective/resourcebooking/content/booking.py:94
 msgid "Timeslot"
-msgstr ""
+msgstr "Zeitslot"
 
 #: collective/resourcebooking/configure.zcml:52
 msgid "Uninstalls the collective.resourcebooking add-on."

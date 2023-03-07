@@ -3,4 +3,7 @@
   <column value="resource"/>
   <column value="day"/>
   <column value="timeslot"/>
+  <index name="resource" meta_type="FieldIndex">
+    <indexed_attr value="resource" />
+  </index>
 </object>

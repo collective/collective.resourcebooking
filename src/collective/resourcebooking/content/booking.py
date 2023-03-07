@@ -120,7 +120,6 @@ class IBooking(model.Schema):
     @invariant
     def validateTimeslotIsAvailable(data):
         if data.timeslot is not None:
-            # import pdb; pdb.set_trace()  # NOQA: E702
             context = data.__context__
             resource_booking = context.get_resource_booking_container()
             timeslot_start = get_timeslot_start(
@@ -131,7 +130,7 @@ class IBooking(model.Schema):
             )
             res = api.content.find(
                 context=resource_booking,
-                # resource=data.resource,
+                resource=data.resource,
                 start={"query": timeslot_start, "range": "min"},
                 end={"query": timeslot_end, "range": "max"},
             )

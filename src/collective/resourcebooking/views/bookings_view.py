@@ -8,6 +8,7 @@ from dateutil.relativedelta import MO
 from dateutil.relativedelta import relativedelta
 from dateutil.relativedelta import SU
 from plone import api
+from pprint import pprint
 from Products.Five.browser import BrowserView
 from zope.interface import implementer
 from zope.interface import Interface
@@ -27,16 +28,14 @@ class BookingsView(BrowserView):
         if rdate:
             self.date = date.fromisoformat(rdate)
         week_dates = self.get_week_dates()
-        print(week_dates)
+        pprint(week_dates)
         current_week_bookings = self.find_bookings(
             week_dates["current_week"][0],
             week_dates["current_week"][1],
         )
         self.current_week_bookings = self.resolve_vocabularies(current_week_bookings)
-        # self.next_week_bookings = self.find_bookings(
-        #     week_dates["next_week"][0],
-        #     week_dates["next_week"][1],
-        # )
+        self.bookings_by_resource = self.get_bookings_by_resource(self.current_week_bookings)
+        pprint(self.bookings_by_resource)
         return self.index()
 
     def find_bookings(self, week_start, week_end):
@@ -51,7 +50,9 @@ class BookingsView(BrowserView):
                 "query": week_start,
                 "range": "min",
             },
+            order_by=['day', 'timeslot']
         )
+        pprint(bookings)
         return bookings
 
     def resolve_vocabularies(self, bookings):
@@ -69,8 +70,15 @@ class BookingsView(BrowserView):
             booking_info["day"] = booking.day.isoformat()
             booking_info["url"] = booking.absolute_url()
             resolved_bookings.append(booking_info)
-        print(resolved_bookings)
         return resolved_bookings
+
+    def get_bookings_by_resource(self, bookings):
+        bookings_by_room = {}
+        for booking in bookings:
+            if booking['resource'] not in bookings_by_room:
+                bookings_by_room[booking['resource']] = []
+            bookings_by_room[booking['resource']].append(booking)
+        return bookings_by_room
 
     def get_week_dates(self):
         today = self.date

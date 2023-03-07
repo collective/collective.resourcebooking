@@ -34,7 +34,9 @@ class BookingsView(BrowserView):
             week_dates["current_week"][1],
         )
         self.current_week_bookings = self.resolve_vocabularies(current_week_bookings)
-        self.bookings_by_resource = self.get_bookings_by_resource(self.current_week_bookings)
+        self.bookings_by_resource = self.get_bookings_by_resource(
+            self.current_week_bookings
+        )
         pprint(self.bookings_by_resource)
         return self.index()
 
@@ -50,7 +52,7 @@ class BookingsView(BrowserView):
                 "query": week_start,
                 "range": "min",
             },
-            order_by=['day', 'timeslot']
+            order_by=["day", "timeslot"],
         )
         pprint(bookings)
         return bookings
@@ -75,9 +77,9 @@ class BookingsView(BrowserView):
     def get_bookings_by_resource(self, bookings):
         bookings_by_room = {}
         for booking in bookings:
-            if booking['resource'] not in bookings_by_room:
-                bookings_by_room[booking['resource']] = []
-            bookings_by_room[booking['resource']].append(booking)
+            if booking["resource"] not in bookings_by_room:
+                bookings_by_room[booking["resource"]] = []
+            bookings_by_room[booking["resource"]].append(booking)
         return bookings_by_room
 
     def get_week_dates(self):

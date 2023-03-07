@@ -4,6 +4,8 @@
 
  <!-- -*- extra stuff goes here -*- -->
 
+  <include file="timeslot.zcml" />
+
   <include file="resource.zcml" />
 
 

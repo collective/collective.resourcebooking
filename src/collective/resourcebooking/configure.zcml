@@ -57,6 +57,8 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <include package=".indexers" />
+
   <include package=".views" />
 
   <include package=".subscribers" />

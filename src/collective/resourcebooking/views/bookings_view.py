@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # from collective.resourcebooking import _
+from ..content.booking import IBooking
+from ..vocabularies.utils import get_vocab_term
 from datetime import date
 from dateutil.relativedelta import MO
 from dateutil.relativedelta import relativedelta
@@ -9,8 +11,7 @@ from plone import api
 from Products.Five.browser import BrowserView
 from zope.interface import implementer
 from zope.interface import Interface
-from ..vocabularies.utils import get_vocab_term
-from ..content.booking import IBooking
+
 import zope.schema
 
 
@@ -59,10 +60,14 @@ class BookingsView(BrowserView):
         for brain in bookings:
             booking = brain.getObject()
             booking_info = {}
-            booking_info["resource"] = get_vocab_term(booking, fields['resource'], booking.resource)['title']
-            booking_info["timeslot"] = get_vocab_term(booking, fields['timeslot'], booking.timeslot)['title']
+            booking_info["resource"] = get_vocab_term(
+                booking, fields["resource"], booking.resource
+            )["title"]
+            booking_info["timeslot"] = get_vocab_term(
+                booking, fields["timeslot"], booking.timeslot
+            )["title"]
             booking_info["day"] = booking.day.isoformat()
-            booking_info['url'] = booking.absolute_url()
+            booking_info["url"] = booking.absolute_url()
             resolved_bookings.append(booking_info)
         print(resolved_bookings)
         return resolved_bookings

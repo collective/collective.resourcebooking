@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from collective.resourcebooking import logger
+from plone import api
 from zope.component import createObject
 from zope.component.hooks import getSite
-from plone import api
 
 
 def handler(obj, event):

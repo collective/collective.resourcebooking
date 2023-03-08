@@ -19,7 +19,7 @@ class BookResourceView(BrowserView):
         safeWrite(self.context, self.request)
         wday = self.request.get("wday")
         today = date.today()
-        day = today + timedelta(days = (int(wday)-today.weekday()))
+        day = today + timedelta(days=(int(wday) - today.weekday()))
         booking = api.content.create(
             container=self.context,
             type="Booking",

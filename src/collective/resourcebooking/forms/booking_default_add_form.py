@@ -34,7 +34,9 @@ class BookingDefaultAddForm(add.DefaultAddForm):
 
     def nextURL(self):
         if self.immediate_view is not None:
-            return "{:s}/@@edit".format("/".join(self.immediate_view.split("/")[:-1]), )
+            return "{:s}/@@edit".format(
+                "/".join(self.immediate_view.split("/")[:-1]),
+            )
         else:
             return self.context.absolute_url()
 

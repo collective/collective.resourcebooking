@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # from collective.resourcebooking import _
-from ..content.booking import IBooking
 from ..content.booking import get_timeslots_count
+from ..content.booking import IBooking
 from ..vocabularies.utils import get_vocab_term
 from collections import defaultdict
 from datetime import date
@@ -38,13 +38,14 @@ class BookingsView(BrowserView):
             week_dates["current_week"][1],
         )
         self.weekdays = (0, 1, 2, 3, 4, 5, 6)
-        self.current_week_bookings, self.timeslots_count = self.resolve_vocabularies(current_week_bookings)
+        self.current_week_bookings, self.timeslots_count = self.resolve_vocabularies(
+            current_week_bookings
+        )
         self.bookings_by_resource = self.get_bookings_by_resource(
             self.current_week_bookings
         )
         pprint(self.bookings_by_resource)
         return self.index()
-
 
     def find_bookings(self, week_start, week_end):
         bookings = api.content.find(
@@ -93,13 +94,16 @@ class BookingsView(BrowserView):
     def get_bookings_by_resource(self, bookings):
         def rec_dd():
             return defaultdict(rec_dd)
+
         bookings_by_room = rec_dd()
         for booking in bookings:
             # if booking["resource"] not in bookings_by_room:
             #     bookings_by_room[booking["resource"]] = []
-            booking_day = date.fromisoformat(booking['day'])
+            booking_day = date.fromisoformat(booking["day"])
             booking_weekday = booking_day.weekday()
-            bookings_by_room[booking["resource"]][booking_weekday][booking["timeslot"]] = booking
+            bookings_by_room[booking["resource"]][booking_weekday][
+                booking["timeslot"]
+            ] = booking
         return bookings_by_room
 
     def get_week_dates(self):

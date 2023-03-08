@@ -24,3 +24,8 @@ class BookingEditForm(edit.DefaultEditForm):
                 continue
             if field_name in self.addform_fields:
                 self.fields[field_name].mode = "display"
+
+    def nextURL(self):
+        rb_container = self.context.get_resource_booking_container()
+        view_url = rb_container.absolute_url()
+        return view_url

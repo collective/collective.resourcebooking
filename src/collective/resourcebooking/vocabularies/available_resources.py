@@ -21,6 +21,9 @@ class AvailableResources(object):
     """ """
 
     def __call__(self, context):
+        terms = []
+        if not context:
+            return SimpleVocabulary(terms)
         resource_booking = context.get_resource_booking_container()
         items = [
             VocabItem(item.id, item.Title)
@@ -38,7 +41,6 @@ class AvailableResources(object):
             context = req.PARENTS[0]
 
         # create a list of SimpleTerm items:
-        terms = []
         for item in items:
             terms.append(
                 SimpleTerm(

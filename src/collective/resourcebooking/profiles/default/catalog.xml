@@ -6,4 +6,7 @@
   <index name="resource" meta_type="FieldIndex">
     <indexed_attr value="resource" />
   </index>
+  <index name="timeslot" meta_type="FieldIndex">
+    <indexed_attr value="timeslot" />
+  </index>
 </object>

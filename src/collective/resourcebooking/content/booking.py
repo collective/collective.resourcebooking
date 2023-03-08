@@ -67,11 +67,11 @@ def resource_default_factory(parent):
     return resource
 
 
-@provider(IContextAwareDefaultFactory)
-def timeslot_default_factory(parent):
-    timeslot = parent.REQUEST.get("timeslot", "")
-    print(f"timeslot: {timeslot}")
-    return timeslot
+# @provider(IContextAwareDefaultFactory)
+# def timeslot_default_factory(parent):
+#     timeslot = parent.REQUEST.get("timeslot", "")
+#     print(f"timeslot: {timeslot}")
+#     return timeslot
 
 
 class TimeslotUnavailable(Invalid):
@@ -122,7 +122,7 @@ class IBooking(model.Schema):
         ),
         vocabulary="collective.resourcebooking.AvailableTimeslots",
         # default="",
-        defaultFactory=timeslot_default_factory,
+        # defaultFactory=timeslot_default_factory,
         required=True,
         readonly=False,
     )

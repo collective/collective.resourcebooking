@@ -10,6 +10,7 @@ from dateutil.relativedelta import MO
 from dateutil.relativedelta import relativedelta
 from dateutil.relativedelta import SU
 from plone import api
+from plone.protect.utils import addTokenToUrl
 from pprint import pprint
 from Products.Five.browser import BrowserView
 from zope.interface import implementer
@@ -46,6 +47,9 @@ class BookingsView(BrowserView):
         )
         pprint(self.bookings_by_resource)
         return self.index()
+
+    def add_token_to_url(self, url):
+        return addTokenToUrl(url)
 
     def find_bookings(self, week_start, week_end):
         bookings = api.content.find(

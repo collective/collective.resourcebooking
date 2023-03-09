@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-07 11:36+0000\n"
+"POT-Creation-Date: 2023-03-09 11:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,11 +46,11 @@ msgstr ""
 msgid "Bookings"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:74
+#: collective/resourcebooking/content/booking.py:98
 msgid "Choose a resource to book"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:63
+#: collective/resourcebooking/content/booking.py:87
 msgid "Computed Title"
 msgstr ""
 
@@ -58,11 +58,11 @@ msgstr ""
 msgid "Container holding available resources to book."
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:85
+#: collective/resourcebooking/content/booking.py:109
 msgid "Day"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:114
+#: collective/resourcebooking/content/booking.py:138
 msgid "End"
 msgstr ""
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Morning"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:71
+#: collective/resourcebooking/content/booking.py:95
 #: collective/resourcebooking/profiles/default/types/Resource.xml
 msgid "Resource"
 msgstr ""
@@ -87,19 +87,19 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:106
+#: collective/resourcebooking/content/booking.py:130
 msgid "Start"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:52
+#: collective/resourcebooking/content/booking.py:76
 msgid "The choosen timeslot is not available on that day!"
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:142
+#: collective/resourcebooking/content/booking.py:165
 msgid "The timeslot is not available on that day."
 msgstr ""
 
-#: collective/resourcebooking/content/booking.py:94
+#: collective/resourcebooking/content/booking.py:118
 msgid "Timeslot"
 msgstr ""
 
@@ -113,4 +113,19 @@ msgstr ""
 
 #: collective/resourcebooking/configure.zcml:52
 msgid "collective.resourcebooking (uninstall)"
+msgstr ""
+
+#. Default: "Calendar week"
+#: collective/resourcebooking/views/bookings_view.pt:22
+msgid "label_calendar_week"
+msgstr ""
+
+#. Default: "next week"
+#: collective/resourcebooking/views/bookings_view.pt:30
+msgid "label_next_week"
+msgstr ""
+
+#. Default: "previous week"
+#: collective/resourcebooking/views/bookings_view.pt:26
+msgid "label_previous_week"
 msgstr ""

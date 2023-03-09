@@ -8,9 +8,9 @@
 
   <browser:page
     name="cancel-resource-booking-view"
-    for="collective.resourcebooking.content.bookings.IBookings"
+    for="collective.resourcebooking.content.booking.IBooking"
     class=".cancel_resource_booking_view.CancelResourceBookingView"
-    permission="zope2.View"
+    permission="zope2.DeleteObjects"
     layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
     />
 
@@ -18,7 +18,7 @@
     name="book-resource-view"
     for="collective.resourcebooking.content.bookings.IBookings"
     class=".book_resource_view.BookResourceView"
-    permission="zope2.View"
+    permission="cmf.AddPortalContent"
     layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
     />
 
@@ -30,5 +30,4 @@
     permission="zope2.View"
     layer="collective.resourcebooking.interfaces.ICollectiveResourcebookingLayer"
     />
-
 </configure>

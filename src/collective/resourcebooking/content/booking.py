@@ -21,12 +21,17 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
 
-def get_timeslots_count(context):
-    """for external usage like in bookings view"""
+def get_available_timeslots(context):
     timeslots_vocab_factory = getUtility(
         IVocabularyFactory, "collective.resourcebooking.AvailableTimeslots"
     )
     vocab = timeslots_vocab_factory(context)
+    return vocab
+
+
+def get_timeslots_count(context):
+    """for external usage like in bookings view"""
+    vocab = get_available_timeslots(context)
     timeslots_count = len(vocab) - 1
     return timeslots_count
 
@@ -65,13 +70,6 @@ def resource_default_factory(parent):
     resource = parent.REQUEST.get("resource", "")
     print(f"resource: {resource}")
     return resource
-
-
-# @provider(IContextAwareDefaultFactory)
-# def timeslot_default_factory(parent):
-#     timeslot = parent.REQUEST.get("timeslot", "")
-#     print(f"timeslot: {timeslot}")
-#     return timeslot
 
 
 class TimeslotUnavailable(Invalid):

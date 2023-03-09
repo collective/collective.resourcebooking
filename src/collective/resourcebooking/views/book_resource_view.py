@@ -18,8 +18,9 @@ class BookResourceView(BrowserView):
     def __call__(self):
         safeWrite(self.context, self.request)
         wday = self.request.get("wday")
-        today = date.today()
-        day = today + timedelta(days=(int(wday) - today.weekday()))
+        target_date_str = self.request.get("date")
+        target_date = (target_date_str and date.fromisoformat(target_date_str)) or date.today()
+        day = target_date + timedelta(days=(int(wday) - target_date.weekday()))
         booking = api.content.create(
             container=self.context,
             type="Booking",
@@ -28,5 +29,10 @@ class BookResourceView(BrowserView):
             day=day,
             timeslot=int(self.request.get("timeslot")),
         )
+        # print(f"Booked {booking.title}")
         rb_container = self.context.get_resource_booking_container()
-        return self.request.response.redirect(rb_container.absolute_url(), status=301)
+        url = rb_container.absolute_url()
+        if target_date_str:
+            url += f"?date={target_date_str}"
+        self.request.response.setHeader("Cache-Control", "max-age=0, must-revalidate, private")
+        return self.request.response.redirect(url, status=301)
